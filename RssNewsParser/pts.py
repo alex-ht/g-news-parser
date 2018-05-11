@@ -45,5 +45,5 @@ class PTS_parser:
                 continue
             yt.streams.filter(only_audio=True, subtype='mp4').order_by('resolution').desc().first().download(output_path='/tmp', filename='%s.mp4' % (output_key))
             ### save data
-            insert_record(self.conn, output_key, source, date, content, 'pts/audio/%s.mp4' % (output_key, int(youtube_key)))
+            insert_record(self.conn, output_key, source, date, content, 'pts/audio/%s.mp4' % (output_key))
             return '/tmp/%s.mp4' % (output_key), output_key
