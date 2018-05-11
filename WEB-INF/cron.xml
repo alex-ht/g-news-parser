@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/tasks/summary</url>
+    <description>蒐集新聞語料</description>
+    <schedule>every 3 hours</schedule>
+  </cron>
+</cronentries>
