@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import re
 import feedparser
+import os
 from datetime import datetime
 from pytube import YouTube # 下載 youtube 聲音
 from RssNewsParser.db import insert_record
+from RssNewsParser.storage import upload_file
 
 class PTS_parser:
     def __init__(self, conn):
@@ -46,4 +48,7 @@ class PTS_parser:
             yt.streams.filter(only_audio=True, subtype='mp4').order_by('resolution').desc().first().download(output_path='/tmp', filename='%s' % (output_key))
             ### save data
             insert_record(self.conn, output_key, source, date, content, 'pts/audio/%s.mp4' % (output_key), youtube_key)
-            return '/tmp/%s.mp4' % (output_key), output_key
+            wave = '/tmp/%s.mp4' % (output_key)
+            with open(wave, 'rb') as fin:
+                upload_file(fin.read(), output_key)
+            os.remove(wave)
