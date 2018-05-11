@@ -1,9 +1,9 @@
 runtime: python
 env: flex
-entrypoint: python3 main.py
+entrypoint: python main.py
 
 runtime_config:
-  python_version: 3
+  python_version: 3.5
 
 # This sample incurs costs to run on the App Engine flexible environment.
 # The settings below are to reduce costs during testing and are not appropriate
@@ -13,5 +13,9 @@ manual_scaling:
   instances: 1
 resources:
   cpu: 1
-  memory_gb: 0.5
+  memory_gb: 1.0
   disk_size_gb: 10
+
+handlers:
+- url: /.*
+  script: main.app

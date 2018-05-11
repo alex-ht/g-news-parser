@@ -1,0 +1,4 @@
+cron:
+- description: "news parser"
+  url: /
+  schedule: every 3 hours
