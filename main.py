@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import RssNewsParser
 
 if __name__ == '__main__':
@@ -10,4 +11,5 @@ if __name__ == '__main__':
     RssNewsParser.close_db(conn)
     # 寫回 cloud storage
     with open('/tmp/news.db', 'rb') as fin:
-        RssNewsParser.upload_file(fin.read(), 'news.db')
+        RssNewsParser.upload_file(fin.read(), 'news.db', 'application/x-sqlite3')
+    os.remove('/tmp/news.db')

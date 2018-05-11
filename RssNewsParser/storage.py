@@ -4,13 +4,13 @@ from google.cloud import storage
 def _get_storage_client():
     return storage.Client(project='asr-corpora-203714')
 
-def upload_file(file_stream, fpath):
+def upload_file(file_stream, fpath, content_type):
     client = _get_storage_client()
     bucket = client.bucket('asr-corpora-203714.appspot.com')
     blob = bucket.blob(fpath)
     blob.upload_from_string(
         file_stream,
-        content_type='audio/mp4')
+        content_type)
 
     url = blob.public_url
 
