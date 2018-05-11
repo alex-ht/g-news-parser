@@ -17,6 +17,7 @@ def parse_news():
     with open('/tmp/news.db', 'rb') as fin:
         RssNewsParser.upload_file(fin.read(), 'news.db', 'application/x-sqlite3')
     os.remove('/tmp/news.db')
+    return 'done'
 
 
 
