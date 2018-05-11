@@ -50,5 +50,5 @@ class PTS_parser:
             insert_record(self.conn, output_key, source, date, content, 'pts/audio/%s.mp4' % (output_key), youtube_key)
             wave = '/tmp/%s.mp4' % (output_key)
             with open(wave, 'rb') as fin:
-                upload_file(fin.read(), output_key)
+                upload_file(fin.read(), 'pts/audio/%s.mp4' % (output_key))
             os.remove(wave)
