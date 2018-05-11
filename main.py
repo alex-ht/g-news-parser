@@ -26,6 +26,6 @@ if __name__ == '__main__':
     conn = RssNewsParser.open_or_create_db('news.db')
     pts = RssNewsParser.PTS_parser(conn)
     wave, output_key = pts.fetch_and_push_data()
-    with open(wave, 'r') as fin:
+    with open(wave, 'rb') as fin:
         upload_file(fin, output_key)
     RssNewsParser.close_db(conn)
