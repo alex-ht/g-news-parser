@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import RssNewsParser
+import logging
 from flask import Flask
 
 
