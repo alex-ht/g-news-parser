@@ -1,6 +1,6 @@
 runtime: python
 env: flex
-entrypoint: gunicorn -b :$PORT main:app
+entrypoint: gunicorn --timeout 600 -b :$PORT main:app
 threadsafe: false
 
 runtime_config:
