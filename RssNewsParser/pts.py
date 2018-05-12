@@ -21,6 +21,7 @@ class PTS_parser:
         return text
 
     def fetch_and_push_data(self):
+        msg = []
         docs = feedparser.parse('https://about.pts.org.tw/rss/XML/newsfeed.xml')
         for doc in docs.entries:
             title = doc.title_detail['value']
@@ -37,7 +38,7 @@ class PTS_parser:
             if re.search('公視晚間新聞', yt.title):
                 output_key = "PTSN_%s_%s" % (date, youtube_key)
                 source = 'PTSN'
-            elif re.search('公視晨間新聞',yt.title):
+            elif re.search('公視早安新聞',yt.title):
                 output_key = "PTSD_%s_%s" % (date, youtube_key)
                 source = 'PTSD'
             elif re.search('公視新聞全球話', yt.title):
@@ -45,6 +46,7 @@ class PTS_parser:
                 source = 'PTSG'
             else:
                 continue
+            msg.append(yt.title)
             ### save data
             try:
                 insert_record(self.conn, output_key, source, date, content, 'pts/audio/%s.mp4' % (output_key), youtube_key)
@@ -55,3 +57,4 @@ class PTS_parser:
             with open(wave, 'rb') as fin:
                 upload_file(fin.read(), 'pts/audio/%s.mp4' % (output_key), 'audio/mp4')
             os.remove(wave)
+        return "\n".join(msg)

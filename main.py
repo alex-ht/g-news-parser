@@ -12,13 +12,13 @@ def parse_news():
     # 建立資料庫
     conn = RssNewsParser.open_or_create_db('/tmp/news.db')
     pts = RssNewsParser.PTS_parser(conn)
-    pts.fetch_and_push_data()
+    msg = pts.fetch_and_push_data()
     RssNewsParser.close_db(conn)
     # 寫回 cloud storage
     with open('/tmp/news.db', 'rb') as fin:
         RssNewsParser.upload_file(fin.read(), 'news.db', 'application/x-sqlite3')
     os.remove('/tmp/news.db')
-    return 'done'
+    return msg
 
 
 
