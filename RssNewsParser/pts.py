@@ -41,7 +41,7 @@ class PTS_parser:
             elif re.search('公視早安新聞',yt.title):
                 output_key = "PTSD_%s_%s" % (date, youtube_key)
                 source = 'PTSD'
-            elif re.search('公視新聞全球話', yt.title):
+            elif re.search('', yt.title):
                 output_key = "PTSG_%s_%s" % (date, youtube_key)
                 source = 'PTSG'
             else:
