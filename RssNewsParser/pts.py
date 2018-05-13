@@ -24,8 +24,11 @@ class PTS_parser:
         msg = []
         docs = feedparser.parse('https://about.pts.org.tw/rss/XML/newsfeed.xml')
         for doc in docs.entries:
-            title = doc.title_detail['value']
-            content = doc.summary_detail['value']
+            # title = doc.title_detail['value']
+            try:
+                content = doc.summary_detail['value']
+            except:
+                continue
             date = datetime.strptime(doc.published, '%a, %d %b %Y 00:00:00 +0800').strftime('%Y-%m-%d')
             match = re.search('http://img.youtube.com/vi/(\w+)/mqdefault.jpg', content)
             content = self.text_preprocess(content)
